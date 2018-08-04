@@ -21,3 +21,14 @@ print('Accuracy score: ', format(accuracy_score(y_test, predictions)))
 print('Precision score: ', format(precision_score(y_test, predictions)))
 print('Recall score: ', format(recall_score(y_test, predictions)))
 print('F1 score: ', format(f1_score(y_test, predictions)))
+print("\n *********** Result of your Input File **********\n")
+with open("input.txt") as f:
+    content = f.readlines()
+content = [x.strip() for x in content]
+cleaned_data = count_vector.transform(content)
+predictions = naive_bayes.predict(cleaned_data)
+for i in range(len(predictions)):
+    if predictions[i] == 1:
+        print("Data ", i + 1, ": oops, Its a Spam")
+    else:
+        print("Data ", i + 1, ": Yooo, Its a Ham")
